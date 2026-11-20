@@ -8,6 +8,7 @@ dotenv.config();
 
 
 const userRoutes = require("./routes/user");
+const movieRoutes = require("./routes/movie");
 
 
 const app = express();
@@ -26,6 +27,7 @@ app.use(cors());
 
 
 app.use("/users", userRoutes);
+app.use("/movies", movieRoutes);
 
 
 if (require.main === module) {
