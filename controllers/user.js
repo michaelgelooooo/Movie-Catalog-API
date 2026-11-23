@@ -56,3 +56,19 @@ module.exports.loginUser = (req, res) => {
         })
         .catch(error => errorHandler(error, req, res))
 }
+
+module.exports.getProfile = (req, res) => {
+    return User.findById(req.user.id)
+        .then(user => {
+            if (!user) {
+                return res.status(404).send({ error: "User not found" });
+            } else {
+                const { password, ...userProfile } = user.toObject();
+
+                return res.status(200).send({
+                    user: userProfile
+                });
+            }
+        })
+        .catch(error => errorHandler(error, req, res));
+};
